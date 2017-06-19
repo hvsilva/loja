@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8" collation="utf8_general_ci">loja</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="cliente" view="colnames">
+<left>703</left>
+<top>32</top>
+<width>99</width>
+<height>180</height>
+<sql_create_table>CREATE TABLE `cliente` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) DEFAULT NULL,
+  `endereco` varchar(200) DEFAULT NULL,
+  `cep` varchar(50) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `senha` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="fornecedor" view="colnames">
+<left>177</left>
+<top>323</top>
+<width>126</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `fornecedor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) DEFAULT NULL,
+  `endereco` varchar(100) DEFAULT NULL,
+  `cnpj` varchar(15) DEFAULT NULL,
+  `id_funcionario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_funcionario` (`id_funcionario`),
+  CONSTRAINT `fornecedor_ibfk_1` FOREIGN KEY (`id_funcionario`) REFERENCES `funcionario` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="funcionario" view="colnames">
+<left>343</left>
+<top>279</top>
+<width>99</width>
+<height>197</height>
+<sql_create_table>CREATE TABLE `funcionario` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) DEFAULT NULL,
+  `cpf` varchar(15) DEFAULT NULL,
+  `endereco` varchar(200) DEFAULT NULL,
+  `telefone` varchar(15) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `senha` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="item_pedido" view="colnames">
+<left>378</left>
+<top>28</top>
+<width>128</width>
+<height>167</height>
+<sql_create_table>CREATE TABLE `item_pedido` (
+  `id_pedido` int(11) DEFAULT NULL,
+  `id_produto` int(11) DEFAULT NULL,
+  `preco_unitario` double DEFAULT NULL,
+  `quantidade` int(11) DEFAULT NULL,
+  `preco_total` double DEFAULT NULL,
+  KEY `id_pedido` (`id_pedido`),
+  KEY `id_produto` (`id_produto`),
+  CONSTRAINT `item_pedido_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id`),
+  CONSTRAINT `item_pedido_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`int`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="pedido" view="colnames">
+<left>543</left>
+<top>344</top>
+<width>100</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `pedido` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `data` datetime DEFAULT NULL,
+  `total` double DEFAULT NULL,
+  `id_cliente` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_cliente` (`id_cliente`),
+  CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="produto" view="colnames">
+<left>21</left>
+<top>43</top>
+<width>125</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `produto` (
+  `int` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(250) DEFAULT NULL,
+  `descricao` varchar(250) DEFAULT NULL,
+  `valor` double DEFAULT NULL,
+  `id_fornecedor` int(11) DEFAULT NULL,
+  PRIMARY KEY (`int`),
+  KEY `id_fornecedor` (`id_fornecedor`),
+  CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedor` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
