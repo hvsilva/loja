@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="/public/template.xhtml">
+
+	<ui:define name="title">        
+            Bem-vindo ao  Inove Móveis.com        
+    </ui:define>
+
+	<ui:define name="nav_bar">
+		<ui:include src="/public/top_bar.xhtml" />
+		<ui:include src="/public/search_bar.xhtml" />
+	</ui:define>
+
+	<ui:define name="content">
+	<h:form id="formGuest" style=" margin:auto;">
+		<p:growl id="growl-mensagem" showDetail="true" sticky="true" autoUpdate="true" closable="true"  /> 
+		<p:messages id="growlCustom" showDetail="false" autoUpdate="true" closable="true" />	
+		<div class="container pg-digitacao">
+		
+				<div class="row">
+					<div class="col-md-12">
+						<h2 class="p-subtitulo">
+							<i class="fa fa-user"></i> Identificação
+						</h2>
+						<hr />
+					</div>
+				</div>
+
+				<div class="wrap100">
+					<div class="row">
+						<div class="col-md-12">
+				
+							<h:outputLabel styleClass="input-label" value="*Email" />
+							<br />						
+							<p:inputText styleClass="input-text input-12" id="guestEmail"
+								required="true" size="30" value="#{loginController.clienteModel.email}">  							
+							</p:inputText>
+							<br />
+	                        <h:outputLabel styleClass="input-label" value="*Senha" />	
+	                        <br />						
+							<p:password  styleClass="input-text input-12" id="guestSenha"
+								value="#{loginController.clienteModel.senha}">
+							</p:password >                    
+							
+						</div>
+					</div>
+				</div>
+				<div class="space-30 hidden-sm hidden-xs"></div>
+				<br />
+				<br />
+
+				<div class="col-md-12">
+					
+					<p:commandButton value="Continuar" id="btnAutenticar"
+						action="#{loginController.efetuarLoginGuest}" 
+						styleClass="ui-priority-primary btn btn-on margin-left-10-sm margin-left-10-md margin-left-10-lg"
+						/>
+					
+
+				</div>
+		
+		</div>
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

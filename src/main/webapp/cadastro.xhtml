@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<ui:composition template="/public/template.xhtml">
+
+	<ui:define name="title">        
+            Bem-vindo ao  Inove Móveis.com        
+    </ui:define>
+
+	<ui:define name="nav_bar">
+		<ui:include src="/public/top_bar.xhtml" />
+		<ui:include src="/public/search_bar.xhtml" />
+	</ui:define>
+
+	<ui:define name="content">
+	 <h:form id="formCadastro" styleClass="form-horizontal">
+	 <p:growl id="growl-mensagem" showDetail="true" sticky="true" /> 
+		<div class="container pg-digitacao">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="min-wrap">
+							<b>Preencha os campos abaixo.</b><br /> *Campos obrigatorios
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<h2 class="p-subtitulo">
+							<i class="fa fa-user"></i> Dados do Cadastrais
+						</h2>
+						<hr />
+					</div>
+				</div>
+
+				<div class="wrap100">
+					<div class="row">
+						<div class="col-md-16">
+				
+							<h:outputLabel styleClass="input-label" value="*Nome" />
+							<br />						
+							<p:inputText styleClass="input-text input-12" id="nome"
+								required="true" size="30" value="#{clienteController.cliente.nome}">  							
+							</p:inputText>
+					
+							<br />
+							<h:outputLabel styleClass="input-label" value="*CPF" />
+							<br />							
+							<p:inputText styleClass="input-text input-12" id="cpf"
+								value="#{clienteController.cliente.cpf}">
+							</p:inputText>
+	                       
+							
+							<br />
+							<h:outputLabel styleClass="input-label" value="*Endereço" />
+							<br />							
+							<p:inputText styleClass="input-text input-12" id="endereco"
+								value="#{clienteController.cliente.endereco}">
+							</p:inputText>
+	                        <br />
+							<h:outputLabel styleClass="input-label" value="*CEP" />	
+							<br />						
+							<p:inputText styleClass="input-text input-12" id="cep"
+								value="#{clienteController.cliente.cep}">
+							</p:inputText>
+	                        <br />
+	                        <h:outputLabel styleClass="input-label" value="*E-mail" />	
+	                        <br />						
+							<p:inputText styleClass="input-text input-12" id="email"
+								value="#{clienteController.cliente.email}">
+							</p:inputText>
+	                        <br />
+	                        <h:outputLabel styleClass="input-label" value="*Senha" />	
+	                        <br />						
+							<p:password  styleClass="input-text input-12" id="senha"
+								value="#{clienteController.cliente.senha}">
+							</p:password >                   
+							
+						</div>
+					</div>
+				</div>
+				<div class="space-30 hidden-sm hidden-xs"></div>
+				<br />
+				<br />
+
+				<div class="col-md-12">
+					
+					<p:commandButton value="Cadastrar" id="btnsalvar"
+						actionListener="#{clienteController.salvar}" >
+						<f:ajax render="formCadastro" resetValues="true"/>
+					</p:commandButton>
+
+				</div>
+		
+		</div>
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

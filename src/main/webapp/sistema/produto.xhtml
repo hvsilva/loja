@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://java.sun.com/jsf/passthrough">
+
+	<ui:composition template="/templates/TPrivate.xhtml">
+	<ui:define name="pageTitle">
+		<h:outputText value="Produtos" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+	<h:form id="formProduto" styleClass="form-horizontal">
+		<div class="container pg-digitacao">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="min-wrap">
+							<b>Preencha os campos abaixo.</b><br /> *Campos obrigatorios
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<h2 class="p-subtitulo">
+							<i class="fa fa-user"></i> Dados do Produto
+						</h2>
+						<hr />
+					</div>
+				</div>
+
+				<div class="wrap100">
+					<div class="row">
+						<div class="col-md-12">
+						
+							<div class="box-select">
+								<h:outputLabel value="*Fornecedor" for="selectfornecedor" styleClass="input-label" />									
+								<br />
+									<p:selectOneMenu id="selectfornecedor"
+										value="#{produtoController.produto.fornecedor}"
+										effect="fold" style="width:50%;" required="true"
+										requiredMessage="A escolha do Fornecedor é obrigatória"
+										converter="converterEntidadeGenerica">
+										<f:selectItem itemLabel="Selecione ..." itemValue="" />
+										<f:selectItems
+											value="#{produtoController.fornecedorController.listaFornecedores}"
+											var="fornecedor" 
+											itemLabel="#{fornecedor.nome}" />						
+									</p:selectOneMenu>
+								</div>
+
+							<h:outputLabel styleClass="input-label" value="*Nome" />
+							<br />
+							<p:inputText styleClass="input-text input-12" id="nome"
+								required="true"  value="#{produtoController.produto.nome}">  							
+							</p:inputText>
+
+							<h:outputLabel styleClass="input-label" value="*Descrição" />
+							<br />
+							<p:inputText styleClass="input-text input-12" id="descricao"
+								value="#{produtoController.produto.descricao}">
+							</p:inputText>
+							
+							<h:outputLabel styleClass="input-label" value="*Categoria" />
+							<br />
+							<p:inputText styleClass="input-text input-12" id="categoria"
+								value="#{produtoController.produto.categoria}">
+							</p:inputText>
+
+							<h:outputLabel styleClass="input-label" value="*Valor" />
+							<br />					
+							<p:inputMask styleClass="input-text input-12" id="rendaMensal"
+										onkeydown="mascara(this,moeda)"
+										pt:placeholder="Digite a Valor"
+										value="#{produtoController.produto.valor}"									
+										requiredMessage="A Renda Bruta Mensal não pode estar vazia"
+										maxlength="12">
+										<f:converter converterId="bigDecimalConverter" />
+							</p:inputMask>
+							
+						</div>
+					</div>
+				</div>
+				<div class="space-30 hidden-sm hidden-xs"></div>
+
+				<div class="col-md-12">
+					<p:commandButton value="Cancelar" immediate="true" 	styleClass="btn btn-off">				
+						<f:ajax render="formProduto" resetValues="true"/>
+					</p:commandButton>
+
+					<p:commandButton value="Cadastrar" id="btnsalvar"
+						actionListener="#{produtoController.salvar}" 
+						update="formProduto"
+						styleClass="ui-priority-primary btn btn-on margin-left-10-sm margin-left-10-md margin-left-10-lg">
+							
+					</p:commandButton>
+
+				</div>
+		
+		</div>
+	</h:form>
+	</ui:define>
+</ui:composition>
+</html>

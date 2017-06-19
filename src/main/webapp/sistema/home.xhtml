@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<body>
+	<ui:composition template="/templates/TPrivate.xhtml">
+		<ui:define name="titulo">
+                Home
+        </ui:define>
+		<ui:define name="conteudo">
+
+			<div class="container pg-home">
+				<h1 class="p-usuario">
+					Olá,
+					<h:outputLabel value="#{menuController.nomeOperador}" />
+					. Seja bem vindo!
+				</h1>
+
+				<div class="space-30"></div>
+
+				<div class="col-sm-12">
+					<div class="col-sm-9">
+						<h2 class="h-titulo">Importante para você</h2>
+						
+							<div class="home-comunicado">
+							<div class="space-30"></div>
+							<h:panelGroup layout="block">
+								
+							</h:panelGroup>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

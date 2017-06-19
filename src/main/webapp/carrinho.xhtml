@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/public/template.xhtml">
+
+	<ui:define name="title">        
+            Bem-vindo ao  Inove Móveis.com        
+    </ui:define>
+
+	<ui:define name="nav_bar">
+		<ui:include src="/public/top_bar.xhtml" />
+		<ui:include src="/public/search_bar.xhtml" />
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form id="formCarrinho">
+	
+			<h:dataTable value="#{carrinhoController.itemPedidos}" var="itemPedido"
+				styleClass="order-table"
+				headerClass="order-table-header"
+				rowClasses="order-table-odd-row,order-table-even-row">				
+
+				<h:column>
+					<f:facet name="header">Produto(s)</f:facet>
+    				#{itemPedido.produto.descricao}
+    			</h:column>
+
+				<h:column>
+					<f:facet name="header">Quantidade</f:facet>
+					<h:selectOneMenu value="#{itemPedido.quantidade}">					    
+						<f:selectItem itemValue="1" itemLabel="1" />
+						<f:selectItem itemValue="2" itemLabel="2" />
+						<f:selectItem itemValue="3" itemLabel="3" />
+						<f:selectItem itemValue="4" itemLabel="4" />
+						<f:selectItem itemValue="5" itemLabel="5" />
+				        <f:ajax event="change" listener="#{carrinhoController.atualizaValorProduto}"  render="formCarrinho"/>	 
+									
+					</h:selectOneMenu>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Valor Unitário</f:facet>
+    				#{itemPedido.produto.valor}
+    			</h:column>
+
+				<h:column id="valorTotal">
+					<f:facet name="header">Valor Total</f:facet>
+    				#{itemPedido.precoTotal}
+    			</h:column>
+    			
+    			<h:column id="itens">
+					<f:facet name="header">Itens</f:facet>
+    				<h:commandLink value="Delete" action="#{carrinhoController.excluirProduto(itemPedido)}" />
+                                
+    			</h:column>
+
+			</h:dataTable>
+			<br />
+			<br />
+			<!-- BOTÃO COMPRAR -->
+			<div class="row container-fluid">
+				<div class="col-md-2">
+					<p:commandButton icon="ui-icon-plus" value="Concluir compra"
+						styleClass="btn btn-danger" ajax="false"
+						actionListener="#{carrinhoController.finalizarCompra}" />
+
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

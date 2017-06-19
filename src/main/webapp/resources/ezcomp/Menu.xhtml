@@ -1,0 +1,69 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<cc:interface>
+</cc:interface>
+<cc:implementation>
+	<header id="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-5">
+					<div id="menu" class="">
+						<a href="javascript:void(0);" class="menu-icone text-left">
+						 <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> 
+						 <i class="fa fa-bars fa-stack-1x"></i>									
+						</span> MENU
+						</a>
+						<nav class="menu-itens">
+						<h:form>
+								<h:panelGroup>
+									
+									<ul>
+                                        <li><a href="#{request.contextPath}/sistema/home.xhtml"><span>Início</span></a></li>
+						                <li><a href="#{request.contextPath}/sistema/fornecedor.xhtml"><span>Fornecedor</span></a></li>
+										<li><a href="#{request.contextPath}/sistema/produto.xhtml"><span>Produtos</span></a></li>											
+									
+									</ul>
+
+									<p:commandLink styleClass="altsenha"
+										actionListener="#{loginController.logout}">
+										<p:confirm icon="btnAlerta" header="Sair"
+											message="Deseja realmente sair?" />
+										<span>Sair</span>
+									</p:commandLink>
+
+									<p:confirmDialog closable="false" styleClass="modal-acao"
+										global="true" showEffect="fade" hideEffect="fade">
+										<center>
+											<p:commandButton value="Sim" type="submit"
+												styleClass="ui-confirmdialog-yes" />
+											<p:commandButton value="Não" type="submit"
+												styleClass="ui-confirmdialog-no" />
+										</center>
+									</p:confirmDialog>
+								</h:panelGroup>
+								
+
+							</h:form>
+
+						</nav>
+					</div>
+				</div>
+				<div class="col-sm-5 mobtop">
+					<div class="header-time pull-right">
+						<i class="fa fa-clock-o" aria-hidden="true"></i> <b>Início de acesso</b><br />							
+						<h:outputText value="#{menuController.hora}" />
+						<h:outputText value=" - " />
+						<h:outputText value="#{menuController.diaDeHoje}" />
+					</div>				
+				</div>
+			</div>
+
+		</div>
+	</header>
+</cc:implementation>
+</html>

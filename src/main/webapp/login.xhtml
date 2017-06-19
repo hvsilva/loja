@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://java.sun.com/jsf/passthrough">
+	
+<ui:composition template="/templates/TPublic.xhtml">
+	<ui:define name="titulo">#{msg['label.loginPageTitle']}</ui:define>
+	<ui:define name="conteudo">
+	<div class="col-sm-12">
+			<div class="logo text-center logo-login">			
+				<h1 style="color: #ebebeb; font-size: 3em">Inove Móveis</h1>
+			</div>
+		</div>
+		<div id="login">
+			<div class="page-wrap page-login">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-4 col-sm-offset-4">
+							<div id="panel_login" class="login-areautil">
+								<h2>
+									<h:outputText value="Bem Vindo!" />
+								</h2>
+								<h:form id="formLogin">
+								<p:growl id="growl-mensagem" showDetail="true" sticky="true" autoUpdate="true" closable="true"  /> 
+<!-- 		                        <p:messages id="growlCustom" showDetail="false" autoUpdate="true" closable="true" />	 -->
+
+									<p:inputText value="#{loginController.funcionarioModel.login}"
+										pt:placeholder="Usuário" id="login"
+										styleClass="input input-12" required="true"
+										requiredMessage="O campo Usuário não pode estar vazio">
+									</p:inputText>
+
+									<div class="space-10"></div>
+
+									<p:password value="#{loginController.funcionarioModel.senha}"
+										pt:placeholder="Senha" id="senha" styleClass="input input-12"
+										required="true"
+										requiredMessage="O campo Senha não pode estar vazio"
+										validatorMessage="A Senha deverá conter de 6 à 12 caracteres">
+										<f:validateLength minimum="6" maximum="12" />
+									</p:password>
+
+									<div class="space-10"></div>
+
+									<p:ajaxStatus onstart="$('#nonAjaxLoad').show()"
+										onsuccess="$('#nonAjaxLoad').hide()"
+										onerror="$('#nonAjaxLoad').hide()" />
+
+									<div class="space-10"></div>
+
+									<p:commandButton value="Entrar" styleClass="block btn-submit"
+										action="#{loginController.efetuarLogin}" update="formLogin" />
+									<p:commandButton value="Limpar" styleClass="hide" type="reset"
+										icon="ui-icon-trash" />
+
+								</h:form>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

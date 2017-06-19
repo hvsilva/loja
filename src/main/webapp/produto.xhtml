@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+	
+
+<ui:composition template="/public/template.xhtml">
+
+
+<style type="text/css">
+  .centered {
+	margin: 0px auto;
+	text-align: center;
+  }
+
+  .left {
+	  float: left;
+ }
+</style>
+
+
+
+	<ui:define name="title">        
+            Bem-vindo ao  Inove Móveis.com        
+    </ui:define>
+
+	<ui:define name="nav_bar">
+		<ui:include src="/public/top_bar.xhtml" />
+		<ui:include src="/public/search_bar.xhtml" />
+	</ui:define>
+
+	<ui:define name="content">
+     <h:form id="formProduto">
+		<p:outputPanel id="showProduto" style="text-align:center;">
+
+			<!-- TITULO -->
+			<div class="row">
+				<div class="col-md-1">
+					<h1 class="page-header">Produtos</h1>
+
+				</div>
+			</div>
+
+			<h:panelGrid columns = "2" >
+      
+				<h:outputText value="#{produtoController.produto.descricao}" />
+				<br />	
+				<br />			
+				
+			</h:panelGrid>
+			<br />			
+			<h:panelGrid columns = "2" >      		
+				<h:outputText value="R$ #{produtoController.produto.valor}" style="font-weight: bold;" />
+			</h:panelGrid>
+			<br />
+			<br />
+
+			<!-- BOTÃO COMPRAR -->
+			<div class="row container-fluid">
+				<div class="col-md-2">
+					
+						<p:commandButton icon="ui-icon-plus"
+						 value="comprar" styleClass="btn btn-danger"   
+						 action="#{carrinhoController.adicionarProduto}" />	
+						 				  
+				
+				</div>
+			</div>
+
+		</p:outputPanel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

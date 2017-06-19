@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/public/template.xhtml">
+
+	<ui:define name="title">        
+            Bem-vindo ao  Inove Móveis.com        
+    </ui:define>
+
+	<ui:define name="nav_bar">
+		<ui:include src="/public/top_bar.xhtml" />
+		<ui:include src="/public/search_bar.xhtml" />
+	</ui:define>
+
+	<ui:define name="content">
+		<h1>Produto</h1>
+
+		<h:form id="formListProduto">
+			<h:dataTable value="#{carrinhoController.itemPedidos}"
+				var="itemPedido" styleClass="order-table"
+				headerClass="order-table-header"
+				rowClasses="order-table-odd-row,order-table-even-row">
+
+				<h:column>
+					<f:facet name="header">Produto(s)</f:facet>
+    				#{itemPedido.produto.nome}
+    			</h:column>
+    			
+    			<h:column>
+					<f:facet name="header">Descrição</f:facet>
+    				#{itemPedido.produto.descricao}
+    			</h:column>
+
+				<h:column>
+					<f:facet name="header">Quantidade</f:facet>
+						#{itemPedido.quantidade}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Valor Unitário</f:facet>
+    				#{itemPedido.produto.valor}
+    			</h:column>
+
+				<h:column id="valorTotal">
+					<f:facet name="header">Valor Total</f:facet>
+    				#{itemPedido.precoTotal}
+    			</h:column>
+
+			</h:dataTable>
+			<br />
+			<br />
+			<!-- BOTÃO COMPRAR -->
+			<div class="row container-fluid">
+				<div class="col-md-2">
+					<h:form id="frmCadastrar">
+						<p:commandButton icon="ui-icon-plus" value="Imprimir Boleto"  onclick="this.form.target='_blank'"
+							styleClass="btn btn-danger" ajax="false" 
+							actionListener="#{carrinhoController.geraBoleto}" />
+			
+					</h:form>
+				</div>
+			</div>
+
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+</html>

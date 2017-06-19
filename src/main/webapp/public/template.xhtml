@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+	<title>
+	<ui:insert name="title">
+           Inove Móveis.com
+    </ui:insert>
+    </title>
+	
+    <h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputStylesheet library="css" name="bootstrap-theme.min.css" />	
+	<h:outputStylesheet library="css" name="menu.css" />
+	<h:outputStylesheet library="css" name="table-style.css" />	
+
+	<h:outputScript library="js" name="bootstrap.min.js" />
+    <h:outputScript library="js" name="jquery-1.12.1.min.js" />
+    
+
+
+	<script>
+        $a = jQuery.noConflict();
+        $a(document).ready(function() {
+            var heightWindow = $a(window).height();
+            var heightBody   = document.body.clientHeight;
+            if(heightWindow > heightBody){
+                $a("#footer").css('position', 'fixed');
+                $a("#footer").css('bottom', '0');
+            }                
+        });
+    </script>
+
+</h:head>
+<h:body>
+	<div>
+		<ui:insert name="nav_bar">
+		 
+		</ui:insert>
+	</div>
+
+	<div class="container">
+		<ui:insert name="content">
+		
+		</ui:insert>
+	</div>
+	<div id="footer"
+		style="padding-top: 30px; margin-top: 90px; width: 100%; background-color: #EEEEEE;"
+		role="footer">
+		<ui:insert name="nav_footer">
+			<ui:include src="footer.xhtml" />
+		</ui:insert>
+	</div>
+</h:body>
+</html>

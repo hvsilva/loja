@@ -1,0 +1,15 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:cc="http://java.sun.com/jsf/composite" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+<cc:interface>
+	<cc:attribute name="templateType" type="java.lang.String" required="true" />
+</cc:interface>
+<cc:implementation>
+
+	<!-- FUNCOES COMUNS A TODOS OS TEMPLATES -->
+	<h:outputScript library="js" name="locale.js" />
+	<h:outputScript library="js" name="funcoes.js" />
+	
+	<p:messages id="growlCustom" showDetail="false" autoUpdate="true" closable="true" />	
+	<p:ajaxStatus onstart="$('#nonAjaxLoad').show()" onsuccess="$('#nonAjaxLoad').hide()" />
+
+</cc:implementation>
+</html>

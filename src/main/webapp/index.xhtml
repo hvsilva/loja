@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/public/template.xhtml">
+
+    <ui:define name="title">        
+            Bem-vindo ao  Inove Móveis.com        
+    </ui:define>
+
+	<ui:define name="nav_bar">
+		<ui:include src="/public/top_bar.xhtml" />
+		<ui:include src="/public/search_bar.xhtml" />
+	</ui:define>
+
+	<ui:define name="content">
+		<p:contentFlow value="#{imagesView.images}" var="image">
+			<p:graphicImage value="img/moveis/#{image}" styleClass="content" />
+<!-- 			<div class="caption">#{image}</div> -->
+		</p:contentFlow>
+	</ui:define>
+	
+</ui:composition>
+</html>
+
+

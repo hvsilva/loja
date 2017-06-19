@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="">
+	
+	   <p:panel id="conteudo">
+            <p:growl>
+                <h:form id="formVenda">
+                    <p:panelGrid columns="2" id="cadastro">
+
+                        <f:facet name="header">Cadastro de Venda</f:facet>
+                        <p:outputLabel value="ID:"></p:outputLabel>
+                        <p:outputLabel value="#{vendaBean.vend.idVenda}"></p:outputLabel>
+
+                        <p:outputLabel value="Forma Pagamento"></p:outputLabel>
+                        <p:selectOneListbox value="#{vendaBean.vend.formaPagtoVenda}">
+                            <f:selectItem itemLabel="Cheque" itemValue="Cheque" />
+                            <f:selectItem itemLabel="Dinheiro" itemValue="Dinheiro" />
+                            <f:selectItem itemLabel="Cartão" itemValue="Cartão" />
+                        </p:selectOneListbox>
+
+                        <p:outputLabel value="Data Venda:"></p:outputLabel>
+                        <p:calendar value="#{vendaBean.vend.dataVenda}"></p:calendar>
+
+                        <p:outputLabel value="Cliente"></p:outputLabel>
+                        <p:selectOneListbox value="#{vendaBean.vend.cliente}">
+                            <f:selectItems value="#{clienteBean.listarCliente()}"
+                                           var="cliente"
+                                           itemLabel="#{cliente.nomePessoa}"
+                                           itemValue="#{cliente}"
+                                           >
+                            </f:selectItems>
+                        </p:selectOneListbox>
+
+                        <p:outputLabel value="Funcionario"></p:outputLabel>
+                        <p:selectOneListbox value="#{vendaBean.vend.funcionario}">
+                            <f:selectItems value="#{funcionarioBean.listarFuncionario()}"
+                                           var="funcionario"
+                                           itemLabel="#{funcionario.nomePessoa}"
+                                           itemValue="#{funcionario}">
+                            </f:selectItems>
+                        </p:selectOneListbox>
+
+                        <p:outputLabel value="Produto"></p:outputLabel>
+                        <p:panel>
+
+
+                           <!-- <p:selectOneListbox value="#{vendaBean.itemVenda.produto}">
+                                <f:selectItems value="#{produtoBean.listarProduto()}"
+                                               var="produto"
+                                               itemLabel="#{produto.descricaoProduto}"
+                                               itemValue="#{produto}">
+                                </f:selectItems>
+                            </p:selectOneListbox>-->
+
+                            <p:autoComplete value="#{vendaBean.itemVenda.produto}"
+                                            dropdown="true"
+                                            completeMethod="#{produtoBean.listar}"
+                                            required="true"
+                                            requiredMessage="Precisa selecionar um produto"
+                                            var="produto"
+                                            itemLabel="#{produto.descricaoProduto}"
+                                            itemValue="#{produto}"
+
+                                           />
+
+
+                            <br></br>
+                            <p:outputLabel value="Quantidade:"></p:outputLabel>
+                            <br></br>
+                            <p:inputText required="true" requiredMessage="É necessário selecionar uma quantidade" value="#{vendaBean.itemVenda.quantItemVenda}"></p:inputText>
+                            <br></br>
+
+                            <p:commandButton value="Adicionar" action="#{vendaBean.adicionarAoCarrinho}" ajax="false"></p:commandButton>
+
+
+                        </p:panel>
+
+                        <p:commandButton value="Limpar" action="#{vendaBean.limparCampos}" ajax="false"></p:commandButton>
+
+
+                    </p:panelGrid>
+                </h:form>
+
+            </p:growl>
+
+            <p:panel id="carrinhoCompra">
+              <h:form>  
+            <p:dataTable value="#{vendaBean.getCarrinhoCompras()}"  var="carrinho">
+                <f:facet name="header">Carrinho de Compras</f:facet>
+
+                <p:column>
+                    <f:facet name="header">
+                        Produto:
+                    </f:facet>
+                    <p:outputLabel value="#{carrinho.produto.descricaoProduto}"></p:outputLabel>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        Valor Unitário:
+                    </f:facet>
+                    <p:outputLabel value="#{carrinho.produto.valorVendaProduto}"></p:outputLabel>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        Produto:
+                    </f:facet>
+                    <p:outputLabel value="#{carrinho.quantItemVenda}"></p:outputLabel>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        Valor:
+                    </f:facet>
+                    <p:outputLabel value="#{carrinho.vltTotalProduto}"></p:outputLabel>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        Ações:
+                    </f:facet>
+                    <p:commandButton value="Remover do carrinho" action="#{vendaBean.removerCarrinho(carrinho)}" update=":carrinhoCompra"></p:commandButton>
+                </p:column>
+            </p:dataTable>
+            <p:outputLabel value="Valor Total do Carrinho: #{vendaBean.valorTotal}"></p:outputLabel>
+            </h:form>
+            </p:panel>
+
+                <p:commandButton value="Finalizar Venda" action="#{vendaBean.finalizarVenda}"></p:commandButton>
+
+        </p:panel>
+	
+	</ui:composition>
+</html>
