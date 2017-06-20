@@ -1,4 +1,4 @@
-ckage br.com.loja.entity;
+package br.com.loja.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
