@@ -129,9 +129,10 @@ public class CarrinhoController implements Serializable {
 		HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 		HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
 
-		Datas datas = Datas.novasDatas()
-				.comDocumento(1, 5, 2008)
-				.comProcessamento(1, 5, 2008).comVencimento(2, 5,2008);
+		Datas datas = Datas.novasDatas()				
+				.comDocumento(19, 06, 2017)
+				.comProcessamento(19, 06, 2017)
+				.comVencimento(19, 07, 2017);
 				
 		Endereco enderecoBeneficiario = Endereco.novoEndereco()
 				.comLogradouro("Av das Empresas, 555")
@@ -171,9 +172,11 @@ public class CarrinhoController implements Serializable {
 				.comDatas(datas).comBeneficiario(beneficiario)
 				.comPagador(pagador)
 				.comValorBoleto(itemPedido.getPrecoTotal())
-				.comNumeroDoDocumento("1234")
-				.comInstrucoes("instrucao 1", "instrucao 2", "instrucao 3", "instrucao 4", "instrucao 5")
-				.comLocaisDePagamento("local 1", "local 2");
+				.comNumeroDoDocumento("1234")				
+				.comInstrucoes(itemPedido.getProduto().getDescricao(), 
+						String.valueOf("Preço unitário - " + itemPedido.getProduto().getValor()), 
+						String.valueOf("Valor Total - " + itemPedido.getPrecoTotal()))
+				.comLocaisDePagamento("Agências Bancárias ", "local 2");
 
 //		GeradorDeBoletoHTML gerador = new GeradorDeBoletoHTML(boleto);
 //		gerador.geraHTML(response.getWriter(), request);

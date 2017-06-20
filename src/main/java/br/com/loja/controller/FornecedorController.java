@@ -39,7 +39,7 @@ public class FornecedorController implements Serializable {
 	public void salvar() {
 		try {
 			fornecedorFacade.salvarNovoRegistro(fornecedor);		
-			Uteis.Mensagem("Fornecedor gravado com sucesso!");
+			Uteis.Mensagem("Fornecedor gravado");
 		} catch (Exception ex) {
 			addMessage(getMessageFromI18N("msg.erro.salvar.fornecedor"), ex.getMessage());
 		}

@@ -15,7 +15,7 @@ public class Uteis {
 	// MOSTRAR MENSAGEM
 	public static void Mensagem(String mensagem) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		facesContext.addMessage(null, new FacesMessage("Alerta", mensagem));
+		facesContext.addMessage(null, new FacesMessage("Sucesso", mensagem));
 	}
 
 	// MOSTRAR MENSAGEM

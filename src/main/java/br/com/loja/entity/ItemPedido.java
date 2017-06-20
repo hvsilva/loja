@@ -27,12 +27,12 @@ public class ItemPedido implements Serializable {
 	private int quantidade;
 
 	// bi-directional many-to-one association to Pedido
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;
 
 	// bi-directional many-to-one association to Produto
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
 

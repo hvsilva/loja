@@ -48,7 +48,7 @@ public class ProdutoController implements Serializable {
 	public void salvar() {
 		try {
 			produtoFacade.salvarNovoRegistro(produto);
-			Uteis.Mensagem("Produto gravado com sucesso!");		
+			Uteis.Mensagem("Produto gravado!");
 		} catch (Exception ex) {
 			addMessage(getMessageFromI18N("msg.erro.salvar.fornecedor"), ex.getMessage());
 		}
@@ -67,13 +67,6 @@ public class ProdutoController implements Serializable {
 		}
 
 	}
-	
-	
-//	public String produtoSelecionado(AjaxBehaviorEvent event) {
-//		System.out.println("PRODUTO: " + produto.getId());
-//		System.out.println("PRODUTO CODIGO: " + produto.getNome());
-//		return "produto?faces-redirect=true";
-//	}
 
 	public List<Produto> completeProduto() {
 		produtos = produtoFacade.buscaTodos();

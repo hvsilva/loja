@@ -2,11 +2,13 @@ package br.com.loja.controller;
 
 import static javax.faces.context.FacesContext.getCurrentInstance;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -102,9 +104,11 @@ public class LoginController implements Serializable {
 		return (Cliente) facesContext.getExternalContext().getSessionMap().get("clienteAutenticado");
 	}
 
-	public String logout() {
+	public void logout() throws IOException {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "index.xhtml";
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/index.xhtml");
+		//return "index.xhtml";
 	}
 
 	public Funcionario getFuncionario() {
